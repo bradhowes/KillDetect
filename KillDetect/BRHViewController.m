@@ -10,6 +10,9 @@
 #import "BRHAppDelegate.h"
 #import "BRHLogger.h"
 
+static NSString* const kHost = @"harrison.local";
+static NSUInteger const kPort = 10000;
+
 const uint8_t pingString[] = "ping\n";
 const uint8_t pongString[] = "pong\n";
 
@@ -55,7 +58,7 @@ static void* kDelegateObserverContext = &kDelegateObserverContext;
 {
     CFReadStreamRef readStream;
     CFWriteStreamRef writeStream;
-    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)(@"harrison.local"), 10000, &readStream, &writeStream);
+    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)(kHost), kPort, &readStream, &writeStream);
 
     self.sentPing = NO;
     self.inputStream = (__bridge_transfer NSInputStream *)readStream;
